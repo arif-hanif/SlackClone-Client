@@ -1,15 +1,7 @@
 import React from "react";
+import { ApolloProvider } from "@apollo/react-hooks";
+import client from "./configs/apollo";
 
-function App() {
-  return (
-    <div className='App'>
-      <header className='App-header'>
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-      </header>
-    </div>
-  );
-}
+const App = () => <ApolloProvider client={client}>test</ApolloProvider>;
 
 export default App;
