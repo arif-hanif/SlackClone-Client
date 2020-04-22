@@ -1,56 +1,13 @@
 import React from "react";
-import { Button, Input, Header } from "semantic-ui-react";
+import { Button, Header } from "semantic-ui-react";
 import { Form, Field } from "react-final-form";
-import styled from "styled-components";
 import * as yup from "yup";
 import { setIn } from "final-form";
-
-const Wrapper = styled.div`
-  background: GhostWhite;
-  height: 100vh;
-`;
-
-const FormLabel = styled.div`
-  padding-bottom: 6px;
-`;
-
-const InputStyled = styled(Input)`
-  padding-bottom: 15px;
-`;
-
-const CenteredContainer = styled.div`
-  background: white;
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
-  box-shadow: 0 0 16px rgba(0, 0, 0, 0.3);
-  position: fixed;
-  z-index: 999;
-  height: 400px;
-  width: 500px;
-  margin: auto;
-  padding: 20px;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-`;
-
-const ErrorStyle = styled.span`
-  font-size: 12px;
-  font-style: italic;
-  color: red;
-`;
-
-export const SInput = ({ input, meta, ...rest }) => (
-  <div>
-    <FormLabel>
-      <strong>
-        {rest.text} {meta.error && meta.touched && <ErrorStyle>{meta.error}</ErrorStyle>}
-      </strong>
-    </FormLabel>
-    <InputStyled error={meta.error && meta.touched} fluid {...input} {...rest} />
-  </div>
-);
+import { useMutation } from "@apollo/react-hooks";
+import CenteredContainer from "./style/CenteredContainer";
+import { SInput } from "../Form/SemanticUIWrappers";
+import { SIGNUP_GQL, LOGIN_GQL } from "./AuthGQL";
+import Wrapper from "../../style/Wrapper";
 
 const required = "- This field is required";
 
@@ -72,9 +29,27 @@ const validate = async (values) => {
   }
 };
 
-const emailRequired = (value) => (value === yup.string().email() ? null : "error");
 const Signup = () => {
-  const onSubmit = (values) => console.log(values);
+  const [Signup] = useMutation(SIGNUP_GQL);
+  const [Login] = useMutation(LOGIN_GQL);
+
+  const onSubmit = (values) => {
+    Signup({
+      variables: {
+        input: values,
+      },
+    })
+      .then(({ data }) => {
+        if (data.signUp.ok) {
+          Login({
+            variables: {
+              input: { email: values.email, password: values.password },
+            },
+          }).then(({ data }) => alert(data.login.token));
+        }
+      })
+      .catch((error) => console.log(error.message.includes("23505")));
+  };
 
   return (
     <Wrapper>
