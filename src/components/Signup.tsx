@@ -4,10 +4,11 @@ import { Form, Field } from "react-final-form";
 import * as yup from "yup";
 import { setIn } from "final-form";
 import { useMutation } from "@apollo/react-hooks";
-import CenteredContainer from "./style/CenteredContainer";
-import { SInput } from "../Form/SemanticUIWrappers";
-import { SIGNUP_GQL, LOGIN_GQL } from "./AuthGQL";
-import Wrapper from "../../style/Wrapper";
+import { Link } from "react-router-dom";
+import CenteredContainer from "./styled/CenteredCard";
+import { Textbox } from "./SemanticUIWrappers";
+import { SIGNUP_GQL, LOGIN_GQL } from "../gql/Auth";
+import { AuthContainer } from "./styled/AuthContainer";
 
 const required = "- This field is required";
 
@@ -52,28 +53,31 @@ const Signup = () => {
   };
 
   return (
-    <Wrapper>
+    <AuthContainer>
       <Form
         onSubmit={onSubmit}
         validate={validate}
-        render={({ handleSubmit }) => (
+        render={({ handleSubmit, submitting, pristine }) => (
           <form onSubmit={handleSubmit}>
             <CenteredContainer>
               <Header textAlign='center' as='h2'>
                 Signup for an account
               </Header>
-              <Field name='displayName' text='DISPLAY NAME' component={SInput} />
-              <Field name='email' text='EMAIL' component={SInput} />
-              <Field name='password' type='password' text='PASSWORD' component={SInput} />
-              <br />
-              <Button type='submit' color='violet' fluid>
+              <Field name='displayName' text='DISPLAY NAME' component={Textbox} />
+              <Field name='email' text='EMAIL' component={Textbox} />
+              <Field name='password' type='password' text='PASSWORD' component={Textbox} />
+              <Button type='submit' color='violet' fluid disabled={submitting || pristine}>
                 CREATE ACCOUNT
               </Button>
+              <br />
+              <div>
+                Already have an account? <Link to='/login'>Login</Link>
+              </div>
             </CenteredContainer>
           </form>
         )}
       />
-    </Wrapper>
+    </AuthContainer>
   );
 };
 

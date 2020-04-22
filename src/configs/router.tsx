@@ -1,12 +1,48 @@
 import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
-import Signup from "../components/Auth/Signup";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import Signup from "../components/Signup";
+import Login from "../components/Login";
+import Footer from "../components/Footer";
+
+const isAuthenticated = () => {
+  const token = localStorage.getItem("token");
+
+  if (token !== null) {
+    return true;
+  }
+  return false;
+};
+
+const PrivateRoute = ({ children, ...rest }) => {
+  return (
+    <Route
+      {...rest}
+      render={({ location }) =>
+        isAuthenticated() ? (
+          children
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/login",
+              state: { from: location },
+            }}
+          />
+        )
+      }
+    />
+  );
+};
 
 const Router = () => (
   <BrowserRouter>
     <Switch>
-      <Route path='/' exact component={Signup} />
+      <PrivateRoute path='/' exact>
+        <div>Protected</div>
+      </PrivateRoute>
+      <Route path='/signup' exact component={Signup} />
+      <Route path='/login' exact component={Login} />
     </Switch>
+    <Footer />
   </BrowserRouter>
 );
 

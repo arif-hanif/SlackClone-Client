@@ -16,15 +16,18 @@ const FormLabel = styled.div`
   padding-bottom: 6px;
 `;
 
-const SInput = ({ input, meta, ...rest }) => (
+const Textbox = ({ input, meta, ...rest }) => (
   <div>
     <FormLabel>
       <strong>
-        {rest.text} {meta.error && meta.touched && <ErrorStyle>{meta.error}</ErrorStyle>}
+        {rest.text}{" "}
+        {(meta.error || meta.submitError) && meta.touched && (
+          <ErrorStyle>{meta.error || meta.submitError}</ErrorStyle>
+        )}
       </strong>
     </FormLabel>
     <InputStyled error={meta.error && meta.touched} fluid {...input} {...rest} />
   </div>
 );
 
-export { SInput };
+export { Textbox };

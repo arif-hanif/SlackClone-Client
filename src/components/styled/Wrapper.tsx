@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-const Wrapper = styled.div`
+const Container = styled.div`
   background: GhostWhite;
   height: 100vh;
 `;
 
-export default Wrapper;
+export default Container;
