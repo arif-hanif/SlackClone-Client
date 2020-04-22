@@ -11,9 +11,11 @@
     "final-form": "^4.19.1",
     "graphql": "^15.0.0",
     "immer": "^6.0.3",
+    "jwt-decode": "^2.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-final-form": "^6.4.0",
+    "react-helmet": "^6.0.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
     "semantic-ui-css": "^2.4.1",
@@ -45,6 +47,7 @@
   },
   "devDependencies": {
     "@types/react-router": "^5.1.5",
-    "@types/react-router-dom": "^5.1.4"
+    "@types/react-router-dom": "^5.1.4",
+    "@types/yup": "^0.26.37"
   }
 }
