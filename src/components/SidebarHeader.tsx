@@ -1,14 +1,10 @@
 import React from "react";
-import styled from "styled-components";
 import { Header } from "semantic-ui-react";
 
-const HeaderWrapper = styled.div`
-  grid-column: 3;
-  grid-row: 1;
-`;
-
-export default ({ channelName }) => (
-  <HeaderWrapper>
-    <Header textAlign='left'>#{channelName}</Header>
-  </HeaderWrapper>
+const SidebarHeader = () => (
+  <Header inverted as='h4' textAlign='center'>
+    HotChocolate Team
+  </Header>
 );
+
+export default SidebarHeader;
