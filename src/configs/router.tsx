@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import Signup from "../components/Signup";
 import Login from "../components/Login";
-import Footer from "../components/Footer";
+//import Footer from "../components/Footer";
 import Layout from "../components/Layout";
 
 const isAuthenticated = () => {
