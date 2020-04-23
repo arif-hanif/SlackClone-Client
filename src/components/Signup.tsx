@@ -7,7 +7,7 @@ import { useMutation } from "@apollo/react-hooks";
 import { Link } from "react-router-dom";
 import CenteredContainer from "./styled/CenteredCard";
 import { Textbox } from "./SemanticUIWrappers";
-import { SIGNUP_GQL, LOGIN_GQL } from "../gql/Auth";
+import { SIGNUP_GQL, LOGIN_GQL } from "../gql/auth";
 import { AuthContainer } from "./styled/AuthContainer";
 
 const required = "- This field is required";

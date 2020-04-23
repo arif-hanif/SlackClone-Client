@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import Signup from "../components/Signup";
 import Login from "../components/Login";
 import Footer from "../components/Footer";
+import Layout from "../components/Layout";
 
 const isAuthenticated = () => {
   const token = localStorage.getItem("token");
@@ -37,12 +38,11 @@ const Router = () => (
   <BrowserRouter>
     <Switch>
       <PrivateRoute path='/' exact>
-        <div>Protected</div>
+        <Layout />
       </PrivateRoute>
       <Route path='/signup' exact component={Signup} />
       <Route path='/login' exact component={Login} />
     </Switch>
-    <Footer />
   </BrowserRouter>
 );
 

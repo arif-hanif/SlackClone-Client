@@ -8,7 +8,7 @@ import { useHistory } from "react-router-dom";
 
 import CenteredContainer from "./styled/CenteredCard";
 import { Textbox } from "./SemanticUIWrappers";
-import { LOGIN_GQL } from "../gql/Auth";
+import { LOGIN_GQL } from "../gql/auth";
 import AuthContainer from "./styled/AuthContainer";
 import { validate } from "../utils/forms/validate";
 const required = "- This field is required";
