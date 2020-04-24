@@ -32,7 +32,7 @@ const Login = () => {
     })
       .then(({ data }) => {
         localStorage.setItem("token", data.login.token);
-        history.push("/");
+        history.push("/channels/1252c325-7adf-4275-a448-fe877afe919c");
       })
       .catch((error) => {
         if (error.message.includes(USER_NOT_EXIST)) {

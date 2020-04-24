@@ -5,6 +5,7 @@ import MessageList from "./MessageList";
 import SendMessage from "./SendMessage";
 import ChannelHeader from "./ChannelHeader";
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
 
 const MessagesContainer = styled.div`
   padding: 15px;
@@ -15,15 +16,19 @@ const MessagesContainer = styled.div`
   width: calc(100% - 250px);
 `;
 
-const Layout = () => (
-  <Container>
-    <Sidebar />
-    <MessagesContainer>
-      <ChannelHeader />
-      <MessageList />
-      <SendMessage />
-    </MessagesContainer>
-  </Container>
-);
+const Layout = () => {
+  let { id } = useParams();
+
+  return (
+    <Container>
+      <Sidebar channelId={id} />
+      <MessagesContainer>
+        <ChannelHeader />
+        <MessageList />
+        <SendMessage />
+      </MessagesContainer>
+    </Container>
+  );
+};
 
 export default Layout;

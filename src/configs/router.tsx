@@ -42,6 +42,7 @@ const Router = () => (
       </PrivateRoute>
       <Route path='/signup' exact component={Signup} />
       <Route path='/login' exact component={Login} />
+      <Route path='/channels/:id' component={Layout} />
     </Switch>
   </BrowserRouter>
 );

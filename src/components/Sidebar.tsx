@@ -5,21 +5,23 @@ import ChannelList from "./ChannelList";
 import CreateChannelModal from "./CreateChannelModal";
 //import DirectMessageModal from "./DirectMessageModal";
 import SidebarHeader from "./SidebarHeader";
+import User from "./User";
 
-const Sidebar = () => {
+const Sidebar = ({ channelId }) => {
   const [isCreateChannelModalOpen, setCreateChannelModalIsOpen] = useState(false);
   //const [isDirectMessageModalOpen, setDirectMessageModalOpen] = useState(false);
 
   return (
     <SidebarContainer>
       <SidebarHeader />
-      <ChannelList setIsOpen={setCreateChannelModalIsOpen} />
+      <ChannelList setIsOpen={setCreateChannelModalIsOpen} channelId={channelId} />
       <CreateChannelModal
         isOpen={isCreateChannelModalOpen}
         setIsOpen={setCreateChannelModalIsOpen}
       />
       {/*<DirectMessageUsers setIsOpen={setDirectMessageModalOpen} />
       <DirectMessageModal isOpen={isDirectMessageModalOpen} setIsOpen={setDirectMessageModalOpen} />*/}
+      <User />
     </SidebarContainer>
   );
 };
