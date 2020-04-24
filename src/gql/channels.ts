@@ -18,3 +18,9 @@ export const CHANNEL_MESSAGES_GQL = gql`
     }
   }
 `;
+
+export const ADD_MESSAGE_TO_CHANNEL_GQL = gql`
+  mutation ADD_MESSAGE_TO_CHANNEL_GQL($input: AddMessageToChannelInput) {
+    addMessageToChannel(input: $input)
+  }
+`;
