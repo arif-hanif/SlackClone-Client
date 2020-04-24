@@ -1,20 +1,27 @@
 import React from "react";
-import { Menu, Header, Icon, Grid } from "semantic-ui-react";
+import { Menu, Icon, Grid } from "semantic-ui-react";
+import styled from "styled-components";
+import SidebarHeaderText from "./styled/SidebarHeaderText";
 
-const ChannelList = () => (
+const StyledMenu = styled(Menu)`
+  padding-left: 15px;
+  padding-right: 8px;
+`;
+
+const ChannelList = ({ setIsOpen }) => (
   <div>
     <Grid columns={2}>
-      <Grid.Column>
-        <Header as='h5' inverted content='Channels' />
+      <Grid.Column width={12}>
+        <SidebarHeaderText>CHANNELS</SidebarHeaderText>
       </Grid.Column>
-      <Grid.Column textAlign='right'>
-        <Icon inverted name='plus' link />
+      <Grid.Column width={2}>
+        <Icon inverted name='plus' link onClick={() => setIsOpen(true)} />
       </Grid.Column>
     </Grid>
-    <Menu inverted fluid secondary vertical>
+    <StyledMenu inverted fluid secondary vertical>
       <Menu.Item name='general' content='# general' active />
-      <Menu.Item name='graphql' content='# graphql' />
-    </Menu>
+      <Menu.Item name='graphql' content='# graphql' onClick={() => console.log("click")} />
+    </StyledMenu>
   </div>
 );
 
