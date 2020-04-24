@@ -23,9 +23,9 @@ const Layout = () => {
     <Container>
       <Sidebar channelId={id} />
       <MessagesContainer>
-        <ChannelHeader />
-        <MessageList />
-        <SendMessage />
+        <ChannelHeader channelId={id} />
+        <MessageList channelId={id} />
+        <SendMessage channelId={id} />
       </MessagesContainer>
     </Container>
   );

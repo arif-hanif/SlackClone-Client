@@ -12,7 +12,7 @@ const SendMessageWrapper = styled.div`
   background: GhostWhite;
 `;
 
-const SendMessage = () => (
+const SendMessage = ({ channelId }) => (
   <SendMessageWrapper>
     <Input focus fluid action={{ icon: "send" }} placeholder='Message...' />
   </SendMessageWrapper>
