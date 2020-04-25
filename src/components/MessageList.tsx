@@ -1,8 +1,9 @@
 import React from "react";
 import { Comment } from "semantic-ui-react";
 import styled from "styled-components";
-import { useQuery } from "@apollo/react-hooks";
-import { CHANNEL_MESSAGES_GQL } from "../gql/channels";
+import { useQuery, useSubscription } from "@apollo/react-hooks";
+import { CHANNEL_MESSAGES_GQL, ON_CHANNEL_MESSAGE_ADD_GQL } from "../gql/channels";
+import { addToCache } from "../utils/graphqlCache";
 
 const MessageListWrapper = styled.div`
   height: calc(100% - 120px);
@@ -14,6 +15,23 @@ const MessageList = ({ channelId }) => {
     variables: {
       filter: { channelId },
     },
+  });
+
+  useSubscription(ON_CHANNEL_MESSAGE_ADD_GQL, {
+    variables: {
+      channelId,
+    },
+    onSubscriptionData: ({ client, subscriptionData }) =>
+      addToCache(
+        client,
+        CHANNEL_MESSAGES_GQL,
+        "channelMessages",
+        subscriptionData,
+        "onChannelMessageAdd",
+        {
+          filter: { channelId },
+        }
+      ),
   });
 
   if (loading) {

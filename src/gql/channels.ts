@@ -21,7 +21,19 @@ export const CHANNEL_MESSAGES_GQL = gql`
 
 export const ADD_MESSAGE_TO_CHANNEL_GQL = gql`
   mutation ADD_MESSAGE_TO_CHANNEL($input: AddMessageToChannelInput) {
-    addMessageToChannel(input: $input)
+    addMessageToChannel(input: $input) {
+      ok
+    }
+  }
+`;
+
+export const ON_CHANNEL_MESSAGE_ADD_GQL = gql`
+  subscription ON_CHANNEL_MESSAGE_ADD($channelId: Uuid!) {
+    onChannelMessageAdd(channelId: $channelId) {
+      id
+      text
+      createdAtUTC
+    }
   }
 `;
 
