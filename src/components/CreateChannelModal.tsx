@@ -17,7 +17,6 @@ const CreateChannelModal = ({ isOpen, setIsOpen }) => {
     }).then(({ data }) => {
       if (data.createChannel.ok) {
         setIsOpen(false);
-        alert("channel created");
       }
     });
   };

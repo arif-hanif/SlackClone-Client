@@ -20,15 +20,24 @@ export const CHANNEL_MESSAGES_GQL = gql`
 `;
 
 export const ADD_MESSAGE_TO_CHANNEL_GQL = gql`
-  mutation ADD_MESSAGE_TO_CHANNEL_GQL($input: AddMessageToChannelInput) {
+  mutation ADD_MESSAGE_TO_CHANNEL($input: AddMessageToChannelInput) {
     addMessageToChannel(input: $input)
   }
 `;
 
 export const CREATE_CHANNEL_GQL = gql`
-  mutation CREATE_CHANNEL_GQL($input: CreateChannelInput) {
+  mutation CREATE_CHANNEL($input: CreateChannelInput) {
     createChannel(input: $input) {
       ok
+    }
+  }
+`;
+
+export const ON_CREATE_CHANNEL_GQL = gql`
+  subscription ON_CREATE_CHANNEL {
+    onCreateChannel {
+      id
+      name
     }
   }
 `;
