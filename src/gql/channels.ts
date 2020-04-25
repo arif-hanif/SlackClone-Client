@@ -1,4 +1,4 @@
-import { gql } from "apollo-boost";
+import gql from "graphql-tag";
 
 export const CHANNELS_GQL = gql`
   query CHANNELS($filter: ChannelFilter, $sort: ChannelSort) {
@@ -22,5 +22,13 @@ export const CHANNEL_MESSAGES_GQL = gql`
 export const ADD_MESSAGE_TO_CHANNEL_GQL = gql`
   mutation ADD_MESSAGE_TO_CHANNEL_GQL($input: AddMessageToChannelInput) {
     addMessageToChannel(input: $input)
+  }
+`;
+
+export const CREATE_CHANNEL_GQL = gql`
+  mutation CREATE_CHANNEL_GQL($input: CreateChannelInput) {
+    createChannel(input: $input) {
+      ok
+    }
   }
 `;

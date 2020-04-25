@@ -14,7 +14,7 @@ const StyledMenu = styled(Menu)`
 
 const ChannelList = ({ setIsOpen, channelId }) => {
   const history = useHistory();
-  const { data, loading, error } = useQuery(CHANNELS_GQL);
+  const { data, loading, error, subscribeToMore } = useQuery(CHANNELS_GQL);
 
   if (loading) {
     return <div>loading...</div>;

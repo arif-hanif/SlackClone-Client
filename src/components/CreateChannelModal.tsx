@@ -1,11 +1,25 @@
 import React from "react";
 import { Modal, Button } from "semantic-ui-react";
 import { Form, Field } from "react-final-form";
+import { useMutation } from "@apollo/react-hooks";
+
 import { Textbox } from "./SemanticUIWrappers";
+import { CREATE_CHANNEL_GQL } from "../gql/channels";
 
 const CreateChannelModal = ({ isOpen, setIsOpen }) => {
+  const [CreateChannel] = useMutation(CREATE_CHANNEL_GQL);
+
   const onSubmit = async (values) => {
-    console.log(values);
+    CreateChannel({
+      variables: {
+        input: values,
+      },
+    }).then(({ data }) => {
+      if (data.createChannel.ok) {
+        setIsOpen(false);
+        alert("channel created");
+      }
+    });
   };
   return (
     <Modal
@@ -27,13 +41,14 @@ const CreateChannelModal = ({ isOpen, setIsOpen }) => {
             <form onSubmit={handleSubmit}>
               <Field name='name' text='Name' component={Textbox} />
               <Field name='description' text='Description' component={Textbox} />
+
+              <Button type='submit' color='green'>
+                Create
+              </Button>
             </form>
           )}
         />
       </Modal.Content>
-      <Modal.Actions>
-        <Button color='green'>Create</Button>
-      </Modal.Actions>
     </Modal>
   );
 };
