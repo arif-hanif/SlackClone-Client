@@ -3,10 +3,10 @@ import { Menu, Icon, Grid } from "semantic-ui-react";
 import styled from "styled-components";
 import { useQuery, useSubscription } from "@apollo/react-hooks";
 import { useHistory } from "react-router-dom";
-import cloneDeep from "lodash-es/cloneDeep";
 
 import SidebarHeaderText from "./styled/SidebarHeaderText";
 import { CHANNELS_GQL, ON_CREATE_CHANNEL_GQL } from "../gql/channels";
+import { addToCache } from "../utils/graphqlCache";
 
 const StyledMenu = styled(Menu)`
   padding-left: 15px;
@@ -19,23 +19,9 @@ const ChannelList = ({ setIsOpen, channelId }) => {
   const { data, loading, error } = useQuery(CHANNELS_GQL);
 
   useSubscription(ON_CREATE_CHANNEL_GQL, {
-    onSubscriptionData: ({ client, subscriptionData }) => {
-      const data = cloneDeep(
-        client.readQuery({
-          query: CHANNELS_GQL,
-        })
-      );
-
-      data.channels.push(subscriptionData.data.onCreateChannel);
-
-      client.writeQuery({
-        query: CHANNELS_GQL,
-        data,
-      });
-    },
+    onSubscriptionData: ({ client, subscriptionData }) =>
+      addToCache(client, CHANNELS_GQL, "channels", subscriptionData, "onCreateChannel"),
   });
-
-  //console.log(subdata);
 
   if (loading) {
     return <div>loading...</div>;
